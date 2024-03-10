@@ -58,7 +58,7 @@ TypeScript, Elastic Search, Docker, NodeJS
 
 ## Other Approaches and Potential Improvements
 
-- To make it more scalable, we can use a cache like Redis between the `gateway` and database. The TTL for this has to be significantly smaller than the time interval for calling the YouTube API.
+- To make it more scalable, we can use a cache like Redis for the `gateway`. The TTL for this has to be significantly smaller than the time interval for calling the YouTube API.
 - There can be multiple instances of `gateway` with a load balancer to handle more traffic.
 - Multiple API Keys support is handled by giving comma-separated values of the API KEY in the `.env` file. A more sophisticated approach to this can be to use a relational database that picks the first available non-exhausted API key. If the API Key exhausts, we will have to update the DB in this case. A major benefit of this is new API keys can be added/removed at runtime.
 - The `writer` service can lead to potential bugs and multiple API calls to YouTube. A possible way to increase availability for this service is to have a heartbeat that restarts the container if it crashes.
