@@ -25,8 +25,9 @@
 
 2. Making partial search request
    
-`POST http://localhost:3000/search?from=0&size=4
-{
+`POST http://localhost:3000/search?from=0&size=4`
+
+Body: `{
     "query": "cricket india"
 }`
 
@@ -35,3 +36,13 @@
 --data '{
     "query": "cricket india"
 }'`
+
+# How does it work?
+
+## Tech Stack
+TypeScript, Elastic Search, Docker, NodeJS
+
+## System Design 
+- The `writer` service is responsible for sending api requests to youtube every 10 seconds and storing the response in Elastic Search. Title, Description, ID and PublishedAt are being stored.
+- The `gateway` service is responsible for providing the api endpoints for the user.
+  
