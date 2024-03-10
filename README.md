@@ -45,4 +45,6 @@ TypeScript, Elastic Search, Docker, NodeJS
 ## System Design 
 - The `writer` service is responsible for sending api requests to youtube every 10 seconds and storing the response in Elastic Search. Title, Description, ID and PublishedAt are being stored.
 - The `gateway` service is responsible for providing the api endpoints for the user.
-  
+
+![image](https://github.com/Just-A-Pixel/Fampay-assignment/assets/58350132/dbe9585f-a994-4ddc-8ac2-3a063fbfd470)
+
