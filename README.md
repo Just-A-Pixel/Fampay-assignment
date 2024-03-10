@@ -13,6 +13,14 @@
 2. From the root directory, run ```bash start.sh```
 3. Wait for a minute to let all containers spin up
 
+# Adding your own YouTube API key
+
+In `writer/.env`, add this:
+`YOUTUBE_API_KEYS=Key1,Key2,Key3`
+
+You may have to create the `.env` file.
+
+
 # Usage
 
 1. Making a paginated get request
@@ -43,8 +51,8 @@ Body: `{
 TypeScript, Elastic Search, Docker, NodeJS
 
 ## System Design of this project
-- The `writer` service is responsible for sending api requests to youtube every 10 seconds and storing the response in Elastic Search. Title, Description, ID and PublishedAt are being stored.
-- The `gateway` service is responsible for providing the api endpoints for the user.
+- The `writer` service is responsible for sending API requests to YouTube every 10 seconds and storing the response in Elastic Search. Title, Description, ID and PublishedAt are being stored.
+- The `gateway` service is responsible for providing the API endpoints for the user.
 
 ![image](https://github.com/Just-A-Pixel/Fampay-assignment/assets/58350132/dbe9585f-a994-4ddc-8ac2-3a063fbfd470)
 
@@ -52,7 +60,7 @@ TypeScript, Elastic Search, Docker, NodeJS
 
 - To make it more scalable, we can use a cache like Redis between the `gateway` and database. The TTL for this has to be significantly smaller than the time interval for calling the YouTube API.
 - There can be multiple instances of `gateway` with a load balancer to handle more traffic.
-- Multiple API Keys support is handled by giving comma-separated values of the API KEY in `.env` file. A more sophisticated approach to this can be to use a relational database that picks the first available non-exhausted API key. If the API Key exhausts, we will have to update the DB in this case. A major benefit of this is new API keys can be added/removed at runtime.
+- Multiple API Keys support is handled by giving comma-separated values of the API KEY in the `.env` file. A more sophisticated approach to this can be to use a relational database that picks the first available non-exhausted API key. If the API Key exhausts, we will have to update the DB in this case. A major benefit of this is new API keys can be added/removed at runtime.
 - The `writer` service can lead to potential bugs and multiple API calls to YouTube. A possible way to increase availability for this service is to have a heartbeat that restarts the container if it crashes.
 
 ### A potentially improved system design can look like this
