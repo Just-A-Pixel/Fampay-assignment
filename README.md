@@ -42,9 +42,19 @@ Body: `{
 ## Tech Stack
 TypeScript, Elastic Search, Docker, NodeJS
 
-## System Design 
+## System Design of this project
 - The `writer` service is responsible for sending api requests to youtube every 10 seconds and storing the response in Elastic Search. Title, Description, ID and PublishedAt are being stored.
 - The `gateway` service is responsible for providing the api endpoints for the user.
 
 ![image](https://github.com/Just-A-Pixel/Fampay-assignment/assets/58350132/dbe9585f-a994-4ddc-8ac2-3a063fbfd470)
+
+## Other Approaches and Potential Improvements
+
+- To make it more scalable, we can use a cache like Redis between the `gateway` and database. The TTL for this has to be significantly smaller than the time interval for calling the YouTube API.
+- There can be multiple instances of `gateway` with a load balancer to handle more traffic.
+- Multiple API Keys support is handled by giving comma-separated values of the API KEY in `.env` file. A more sophisticated approach to this can be to use a relational database that picks the first available non-exhausted API key. If the API Key exhausts, we will have to update the DB in this case. A major benefit of this is new API keys can be added/removed at runtime.
+- The `writer` service can lead to potential bugs and multiple API calls to YouTube. A possible way to increase availability for this service is to have a heartbeat that restarts the container if it crashes.
+
+### A potentially improved system design can look like this
+![image](https://github.com/Just-A-Pixel/Fampay-assignment/assets/58350132/37185bed-ebc9-4d8d-8e55-2d72667fb444)
 
