@@ -64,5 +64,5 @@ TypeScript, Elastic Search, Docker, NodeJS
 - The `writer` service can lead to potential bugs and multiple API calls to YouTube. A possible way to increase availability for this service is to have a heartbeat that restarts the container if it crashes.
 
 ### A potentially improved system design can look like this
-![image](https://github.com/Just-A-Pixel/Fampay-assignment/assets/58350132/54b229db-1494-4c9e-b728-464b672b87ec)
+![image](https://github.com/Just-A-Pixel/Fampay-assignment/assets/58350132/c7169849-5739-4d5f-a59a-724f24fdab84)
 
